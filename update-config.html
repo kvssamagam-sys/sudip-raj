@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Wedding Details — Helper Tool</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%237B1E1E'/><circle cx='50' cy='50' r='42' fill='none' stroke='%23D4AF37' stroke-width='3'/><text x='50' y='63' font-family='serif' font-size='44' font-weight='bold' fill='%23D4AF37' text-anchor='middle'>ॐ</text></svg>">
+  <link rel="stylesheet" href="css/tailwind.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { background-color: #FFF8E7; color: #2A1713; font-family: 'Poppins', sans-serif; }
+    .card { background: #FFFFFF; border: 1.5px solid rgba(212, 175, 55, 0.5); border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 20px rgba(123, 30, 30, 0.08); }
+    .input-box { width: 100%; padding: 0.65rem 0.85rem; border: 1px solid rgba(212, 175, 55, 0.6); border-radius: 6px; background-color: #FAF6ED; font-size: 0.9rem; }
+    .input-box:focus { outline: none; background: #fff; border-color: #7B1E1E; box-shadow: 0 0 0 2px rgba(123, 30, 30, 0.2); }
+  </style>
+</head>
+<body class="p-4 sm:p-8">
+  <div class="max-w-2xl mx-auto space-y-6">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-gold/40 pb-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-maroon border border-gold flex items-center justify-center text-gold font-bold text-lg">
+          ॐ
+        </div>
+        <div>
+          <h1 class="font-serif text-2xl font-bold text-maroon">Update Wedding Details</h1>
+          <p class="text-xs text-charcoal-muted">Helper tool to update your invitation website offline without touching code.</p>
+        </div>
+      </div>
+      <a href="index.html" class="btn-royal-outline text-xs py-2 px-3">
+        ← Open Invitation
+      </a>
+    </div>
+
+    <!-- Alert Banner -->
+    <div id="save-alert" class="hidden p-3 bg-green-100 border border-green-400 text-green-900 rounded-lg text-xs font-semibold flex items-center justify-between">
+      <span>✓ Updated in localStorage! The invitation website will immediately show these details.</span>
+      <button type="button" onclick="this.parentElement.classList.add('hidden')" class="text-green-800 underline">Dismiss</button>
+    </div>
+
+    <!-- Live Form -->
+    <div class="card space-y-4">
+      <h2 class="font-serif text-lg font-bold text-maroon border-b border-gold/30 pb-2">Event Parameters</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-maroon uppercase mb-1">Groom's Name</label>
+          <input type="text" id="groomName" class="input-box" placeholder="e.g. Aarav Sharma">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-maroon uppercase mb-1">Bride's Name</label>
+          <input type="text" id="brideName" class="input-box" placeholder="e.g. Ananya Patel">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-maroon uppercase mb-1">Wedding Date &amp; Time (ISO)</label>
+          <input type="datetime-local" id="weddingDate" class="input-box">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-maroon uppercase mb-1">Host WhatsApp (With Country Code)</label>
+          <input type="text" id="hostWhatsApp" class="input-box" placeholder="e.g. 919876543210">
+        </div>
+
+        <div class="sm:col-span-2">
+          <label class="block text-xs font-bold text-maroon uppercase mb-1">Primary Venue Name</label>
+          <input type="text" id="venueName" class="input-box" placeholder="e.g. The Royal Palace &amp; Heritage Gardens">
+        </div>
+
+        <div class="sm:col-span-2">
+          <label class="block text-xs font-bold text-maroon uppercase mb-1">Venue Full Address</label>
+          <input type="text" id="venueAddress" class="input-box" placeholder="e.g. Palace Road, Udaipur, Rajasthan">
+        </div>
+      </div>
+
+      <div class="pt-2 flex flex-wrap gap-3">
+        <button type="button" id="apply-btn" class="btn-royal-gold text-xs">
+          💾 Save to localStorage
+        </button>
+        <button type="button" id="reset-btn" class="btn-royal-outline text-xs">
+          🔄 Reset Defaults
+        </button>
+        <a href="index.html" class="btn-royal-maroon text-xs">
+          👁️ Preview Invitation
+        </a>
+      </div>
+    </div>
+
+    <!-- Pasteable JS Snippet Box -->
+    <div class="card space-y-3">
+      <div class="flex items-center justify-between">
+        <h2 class="font-serif text-lg font-bold text-maroon">JS Snippet for config.js (Optional)</h2>
+        <button type="button" id="copy-code-btn" class="btn-royal-outline text-xs py-1.5 px-3">
+          📋 Copy Code
+        </button>
+      </div>
+      <p class="text-xs text-charcoal-muted">
+        If you want to bake these values directly into <code class="font-mono bg-ivory px-1 py-0.5 rounded border border-gold/40">config.js</code> for deployment, paste this snippet at the top of <code class="font-mono">config.js</code>:
+      </p>
+      <pre class="bg-[#2A0606] text-[#FFF8E7] p-4 rounded-lg text-xs overflow-x-auto font-mono leading-relaxed border border-gold/40"><code id="code-snippet"></code></pre>
+    </div>
+
+  </div>
+
+  <script src="config.js"></script>
+  <script>
+    const d = (window.WEDDING_CONFIG && window.WEDDING_CONFIG._defaults) || {};
+
+    function loadInitial() {
+      let current = Object.assign({}, window.WEDDING_CONFIG || {});
+      try {
+        const saved = localStorage.getItem('wedding_custom_config');
+        if (saved) Object.assign(current, JSON.parse(saved));
+      } catch (e) {}
+
+      function val(v, fallback) {
+        if (!v || (typeof v === 'string' && v.startsWith('{{') && v.endsWith('}}'))) return fallback || '';
+        return v;
+      }
+
+      document.getElementById('groomName').value = val(current.groomName, d.groomName || 'Aarav Sharma');
+      document.getElementById('brideName').value = val(current.brideName, d.brideName || 'Ananya Patel');
+      document.getElementById('hostWhatsApp').value = val(current.hostWhatsApp, d.hostWhatsApp || '919876543210');
+      document.getElementById('venueName').value = val(current.venueName, d.venueName || 'The Royal Palace & Heritage Gardens');
+      document.getElementById('venueAddress').value = val(current.venueAddress, d.venueAddress || 'Palace Road, Udaipur, Rajasthan');
+
+      const dateStr = val(current.weddingDate, d.weddingDate || '2026-11-28T18:00:00');
+      document.getElementById('weddingDate').value = dateStr.length >= 16 ? dateStr.substring(0, 16) : '2026-11-28T18:00';
+
+      updateSnippet();
+    }
+
+    function getData() {
+      const groom = document.getElementById('groomName').value.trim();
+      const bride = document.getElementById('brideName').value.trim();
+      const dt = document.getElementById('weddingDate').value;
+      return {
+        groomName: groom,
+        brideName: bride,
+        coupleInitials: `${groom[0] || 'A'} & ${bride[0] || 'A'}`,
+        weddingDate: dt ? `${dt}:00` : '2026-11-28T18:00:00',
+        venueName: document.getElementById('venueName').value.trim(),
+        venueAddress: document.getElementById('venueAddress').value.trim(),
+        hostWhatsApp: document.getElementById('hostWhatsApp').value.trim(),
+        hashtag: `#${groom.replace(/\\s+/g, '')}Weds${bride.replace(/\\s+/g, '')}`
+      };
+    }
+
+    function updateSnippet() {
+      const data = getData();
+      const snippet = 
+`const WEDDING_CONFIG = {
+  groomName: "${data.groomName}",
+  brideName: "${data.brideName}",
+  weddingDate: "${data.weddingDate}",
+  venueName: "${data.venueName}",
+  venueAddress: "${data.venueAddress}",
+  hostWhatsApp: "${data.hostWhatsApp}",
+  coupleInitials: "${data.coupleInitials}",
+  hashtag: "${data.hashtag}",
+  // ... events & story milestones stay in config.js
+};`;
+      document.getElementById('code-snippet').textContent = snippet;
+    }
+
+    ['groomName', 'brideName', 'weddingDate', 'venueName', 'venueAddress', 'hostWhatsApp'].forEach(id => {
+      document.getElementById(id).addEventListener('input', updateSnippet);
+    });
+
+    document.getElementById('apply-btn').addEventListener('click', () => {
+      const data = getData();
+      localStorage.setItem('wedding_custom_config', JSON.stringify(data));
+      localStorage.setItem('shubh_vivah_custom_config', JSON.stringify(data));
+      document.getElementById('save-alert').classList.remove('hidden');
+      updateSnippet();
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      if (confirm("Reset to default sample data?")) {
+        localStorage.removeItem('wedding_custom_config');
+        localStorage.removeItem('shubh_vivah_custom_config');
+        loadInitial();
+        document.getElementById('save-alert').classList.remove('hidden');
+        document.getElementById('save-alert').textContent = "Reset to defaults!";
+      }
+    });
+
+    document.getElementById('copy-code-btn').addEventListener('click', () => {
+      const text = document.getElementById('code-snippet').textContent;
+      navigator.clipboard.writeText(text).then(() => alert("Snippet copied to clipboard!"));
+    });
+
+    document.addEventListener('DOMContentLoaded', loadInitial);
+  </script>
+</body>
+</html>

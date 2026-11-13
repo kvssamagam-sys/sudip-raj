@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <!-- Mobile-first viewport: strictly optimized for 360px+ phone screens -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  
+  <title>Shubh Vivah — Wedding &amp; Engagement Invitation</title>
+  <meta name="description" content="॥ श्री गणेशाय नमः ॥ You are cordially invited to celebrate the auspicious wedding and engagement ceremony of Aarav &amp; Ananya.">
+  <meta name="theme-color" content="#7B1E1E">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Shubh Vivah">
+
+  <!-- PWA Web App Manifest (Add to Home Screen) -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Open Graph Meta Tags (Optimized for WhatsApp Rich Link Previews) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="॥ शुभ विवाह ॥ Aarav &amp; Ananya's Wedding Invitation">
+  <meta property="og:description" content="We joyfully invite you to grace our wedding ceremony and shower your divine blessings on Saturday, November 28, 2026. Tap to open invitation.">
+  <meta property="og:url" content="./index.html">
+  <meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'><rect width='1200' height='630' fill='%237B1E1E'/><circle cx='600' cy='315' r='260' fill='none' stroke='%23D4AF37' stroke-width='8'/><text x='600' y='250' font-family='serif' font-size='56' fill='%23D4AF37' text-anchor='middle'>॥ शुभ विवाह ॥</text><text x='600' y='330' font-family='serif' font-size='64' font-weight='bold' fill='%23FFF8E7' text-anchor='middle'>Aarav &amp; Ananya</text><text x='600' y='400' font-family='sans-serif' font-size='32' fill='%23FF9933' text-anchor='middle'>Saturday, November 28, 2026</text></svg>">
+
+  <!-- Favicon (Sacred Om in Gold on Maroon) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%237B1E1E'/><circle cx='50' cy='50' r='42' fill='none' stroke='%23D4AF37' stroke-width='3'/><text x='50' y='63' font-family='serif' font-size='44' font-weight='bold' fill='%23D4AF37' text-anchor='middle'>ॐ</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='36' fill='%237B1E1E'/><circle cx='90' cy='90' r='75' fill='none' stroke='%23D4AF37' stroke-width='6'/><text x='90' y='114' font-family='serif' font-size='76' font-weight='bold' fill='%23D4AF37' text-anchor='middle'>ॐ</text></svg>">
+
+  <!-- 100% OFFLINE LOCAL LIBRARIES: AOS & FlipDown (NO CDNs) -->
+  <link rel="stylesheet" href="libs/aos.css">
+  <link rel="stylesheet" href="libs/flipdown.css">
+
+  <!-- Compiled Local Stylesheet (Tailwind Utilities + Custom Royal Indian Styles) -->
+  <link rel="stylesheet" href="css/tailwind.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-ivory text-charcoal font-sans antialiased selection:bg-gold-light selection:text-maroon">
+
+  <!-- ========================================================================
+       1. SACRED GANESH INVOCATION BAR (TOP HEADER)
+       ======================================================================== -->
+  <div class="ganesh-bar">
+    <!-- Inline Lord Ganesh Sacred SVG Silhouette -->
+    <svg class="ganesh-svg" viewBox="0 0 100 100" aria-label="Lord Ganesh Icon">
+      <path d="M50 8 C40 8 32 14 30 22 C26 24 22 28 22 34 C22 42 28 48 34 50 C33 54 33 60 36 66 C32 68 28 72 28 78 C28 86 36 92 50 92 C64 92 72 86 72 78 C72 72 68 68 64 66 C67 60 67 54 66 50 C72 48 78 42 78 34 C78 28 74 24 70 22 C68 14 60 8 50 8 Z M50 16 C55 16 58 19 60 23 C57 23 53 24 50 24 C47 24 43 23 40 23 C42 19 45 16 50 16 Z M50 28 C55 28 58 31 58 36 C58 44 48 48 48 56 C48 60 52 64 56 64 C53 66 49 68 46 68 C42 68 39 65 39 60 C39 52 48 46 48 40 C48 34 45 32 42 32 C43 29 46 28 50 28 Z M50 22 C51 22 52 23 52 24 C52 25 51 26 50 26 C49 26 48 25 48 24 C48 23 49 22 50 22 Z M62 38 C64 38 66 40 66 43 C66 46 63 48 60 47 C61 44 62 41 62 38 Z"/>
+    </svg>
+    <div class="flex items-center gap-2 font-devanagari font-bold">
+      <span class="text-gold-light text-xs sm:text-sm">॥ श्री गणेशाय नमः ॥</span>
+      <span class="text-gold/80 text-xs">|| Shubh Vivah ||</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       2. INTERACTIVE ROYAL ENVELOPE COVER (FULL-SCREEN OPENING SCENE)
+       ======================================================================== -->
+  <div id="envelope-overlay" aria-modal="true" role="dialog" aria-label="Interactive Wedding Invitation Envelope">
+    <div class="envelope-stage">
+      <div id="envelope-wrapper" class="envelope-wrapper">
+        <!-- Inside Envelope Backing -->
+        <div class="envelope-back"></div>
+
+        <!-- Inside Invitation Letter (Glides up when unsealed) -->
+        <div id="letter-card" class="letter-card">
+          <!-- Small Ganesh / Om Emblem -->
+          <div class="w-8 h-8 rounded-full border border-gold flex items-center justify-center text-maroon font-serif font-bold text-xs bg-white mb-1 shadow-sm">
+            <span>ॐ</span>
+          </div>
+          <span class="font-devanagari text-[0.7rem] text-saffron-dark font-semibold">॥ शुभ विवाह निमंत्रण ॥</span>
+          <h3 class="font-serif text-lg font-bold text-maroon mt-0.5" data-populate="coupleNames">Aarav &amp; Ananya</h3>
+          <p class="text-[0.72rem] text-charcoal-light font-sans mt-0.5">Saturday, November 28, 2026</p>
+          <div class="mt-2 text-[0.68rem] text-gold-dark font-sans uppercase tracking-widest font-semibold flex items-center gap-1">
+            <span>✨ Tap seal to open</span>
+          </div>
+        </div>
+
+        <!-- Flaps -->
+        <div class="flap-left"></div>
+        <div class="flap-right"></div>
+        <div class="flap-bottom"></div>
+
+        <!-- Top Triangular 3D Flap -->
+        <div class="flap-top"></div>
+
+        <!-- Imperial Gold Wax Seal (Clickable Trigger) -->
+        <div id="wax-seal" class="wax-seal" title="Tap to unseal royal invitation" role="button" tabindex="0">
+          <div class="text-center">
+            <span class="font-serif text-xl font-bold leading-none block">ॐ</span>
+            <span class="text-[0.55rem] tracking-tighter uppercase font-sans font-bold leading-none block mt-0.5">Shubh</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hint prompt with lotus icons -->
+      <div class="envelope-prompt">
+        <svg class="w-3.5 h-3.5 fill-gold" viewBox="0 0 24 24"><path d="M12 2C9 7 4 9 4 14c0 4.4 3.6 8 8 8s8-3.6 8-8c0-5-5-7-8-12z"/></svg>
+        <span>Tap the golden wax seal to open invitation</span>
+        <svg class="w-3.5 h-3.5 fill-gold" viewBox="0 0 24 24"><path d="M12 2C9 7 4 9 4 14c0 4.4 3.6 8 8 8s8-3.6 8-8c0-5-5-7-8-12z"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       STICKY ROYAL APP BAR (MOBILE-FIRST)
+       ======================================================================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gold/40 px-3 py-2.5 shadow-sm">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-maroon border border-gold flex items-center justify-center text-gold-light text-xs font-bold font-serif shadow-sm">
+          <span data-populate="coupleInitials">A &amp; A</span>
+        </div>
+        <span class="font-serif text-sm font-bold text-maroon tracking-wide" data-populate="coupleNames">Aarav &amp; Ananya</span>
+      </a>
+
+      <div class="flex items-center gap-2">
+        <button id="replay-envelope-btn" class="text-xs uppercase font-semibold text-maroon border border-gold/50 px-2.5 py-1.5 rounded-full bg-ivory flex items-center gap-1 min-h-[36px]" title="Re-open envelope">
+          <span>✉️ Envelope</span>
+        </button>
+        <a href="#rsvp" class="btn-royal-gold text-xs py-1.5 px-3 min-h-[36px]">
+          RSVP
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       3. HERO / INVITATION SECTION
+       ======================================================================== -->
+  <section id="hero" class="hero-section">
+    <!-- Rotating Sacred Mandala SVG Background Motif -->
+    <svg class="mandala-bg" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="90" fill="none" stroke="#7B1E1E" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+      <circle cx="100" cy="100" r="50" fill="none" stroke="#7B1E1E" stroke-width="1.2"/>
+      <circle cx="100" cy="100" r="30" fill="none" stroke="#D4AF37" stroke-width="1"/>
+      <g stroke="#7B1E1E" stroke-width="1">
+        <line x1="100" y1="10" x2="100" y2="190"/>
+        <line x1="10" y1="100" x2="190" y2="100"/>
+        <line x1="36" y1="36" x2="164" y2="164"/>
+        <line x1="36" y1="164" x2="164" y2="36"/>
+      </g>
+    </svg>
+
+    <div class="relative z-10 max-w-xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
+      <!-- Sacred Paisley / Lotus SVG Badge -->
+      <div class="mb-3">
+        <span class="shubh-vivah-badge">Save The Date</span>
+      </div>
+
+      <p class="font-devanagari text-xs sm:text-sm text-saffron-dark font-semibold tracking-wider mb-2">
+        ॥ वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ॥
+      </p>
+
+      <p class="text-xs sm:text-sm text-charcoal-light leading-relaxed max-w-md mx-auto mb-4 font-sans">
+        Together with the blessings of their ancestors and families, joyfully invite you to celebrate the holy wedding ceremony of
+      </p>
+
+      <!-- Couple Names in Majestic Serif Typography -->
+      <div class="my-4 space-y-1">
+        <h1 class="couple-title" data-populate="brideName">Ananya Patel</h1>
+        <div class="flex items-center justify-center gap-3 my-1">
+          <span class="w-10 h-[1.5px] bg-gold"></span>
+          <span class="font-serif italic text-2xl sm:text-3xl text-gold font-light">&amp;</span>
+          <span class="w-10 h-[1.5px] bg-gold"></span>
+        </div>
+        <h1 class="couple-title" data-populate="groomName">Aarav Sharma</h1>
+      </div>
+
+      <!-- Sacred Lotus Flower SVG Divider -->
+      <div class="motif-divider my-6">
+        <svg class="w-6 h-6 fill-gold" viewBox="0 0 24 24">
+          <path d="M12 2C10.5 5 7 7.5 5 11c-2 3.5-.5 7 2 8.5 2.5 1.5 5 .5 5-2 0 2.5 2.5 3.5 5 2 2.5-1.5 4-5 2-8.5-2-3.5-5.5-6-7-9z"/>
+        </svg>
+      </div>
+
+      <!-- Wedding Date & Venue Tagline -->
+      <div class="space-y-1">
+        <p class="font-serif text-lg sm:text-2xl font-bold text-maroon">
+          Saturday, November 28, 2026
+        </p>
+        <p class="text-xs sm:text-sm uppercase tracking-wider text-charcoal-muted font-sans font-medium">
+          <span data-populate="venueName">The Royal Palace &amp; Heritage Gardens</span> • Udaipur, Rajasthan
+        </p>
+      </div>
+
+      <!-- Call to Actions (Mobile tap targets >= 44px) -->
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="#rsvp" class="btn-royal-maroon w-full sm:w-auto text-xs">
+          💬 Send WhatsApp RSVP
+        </a>
+        <a href="#events" class="btn-royal-outline w-full sm:w-auto text-xs">
+          📜 View Sacred Itinerary
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       4. LIVE COUNTDOWN SECTION (FLIPDOWN FLIP-CLOCK)
+       ======================================================================== -->
+  <section id="countdown" class="countdown-section">
+    <div class="max-w-xl mx-auto" data-aos="fade-up">
+      <span class="font-devanagari text-xs text-gold-accent font-semibold tracking-widest block mb-1">
+        ॥ शुभ मुहुर्त प्रतीक्षा ॥
+      </span>
+      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white mb-2">
+        Auspicious Countdown
+      </h2>
+      <p class="text-xs text-gold-light/80 font-sans max-w-sm mx-auto mb-6">
+        Every second draws us closer to the sacred Saat Phere and divine blessings.
+      </p>
+
+      <!-- Offline FlipDown Clock Container -->
+      <div id="flipdown" class="flipdown"></div>
+
+      <p id="countdown-note" class="text-xs text-gold font-devanagari mt-6">
+        ॥ शनिवार, २८ नवंबर २०२६ • शुभ पाणिग्रहण ॥
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       5. OUR STORY SECTION (3-ITEM ROMANTIC TIMELINE)
+       ======================================================================== -->
+  <section id="story" class="py-16 px-4 bg-ivory">
+    <div class="max-w-xl mx-auto">
+      <div class="text-center mb-10" data-aos="fade-up">
+        <span class="shubh-vivah-badge mb-2">Destined By Grace</span>
+        <h2 class="font-serif text-3xl font-bold text-maroon mt-2 mb-2">Our Love Story</h2>
+        <div class="w-16 h-[1.5px] bg-gold mx-auto"></div>
+        <p class="text-xs text-charcoal-muted mt-2 font-sans">
+          A sacred journey woven with shared traditions, laughter, and lifelong devotion.
+        </p>
+      </div>
+
+      <!-- Story Timeline Container (Populated dynamically) -->
+      <div id="story-container">
+        <!-- Hydrated dynamically from config.js storyTimeline -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       6. EVENTS SECTION (ENGAGEMENT & WEDDING CARDS)
+       ======================================================================== -->
+  <section id="events" class="py-16 px-4 bg-paper border-t border-b border-gold/40">
+    <div class="max-w-2xl mx-auto">
+      <div class="text-center mb-10" data-aos="fade-up">
+        <span class="shubh-vivah-badge mb-2">Sacred Celebrations</span>
+        <h2 class="font-serif text-3xl font-bold text-maroon mt-2 mb-2">Wedding Itinerary</h2>
+        <div class="w-16 h-[1.5px] bg-gold mx-auto"></div>
+        <p class="text-xs text-charcoal-muted mt-2 font-sans">
+          Please join us to celebrate each auspicious ritual with love and joy.
+        </p>
+      </div>
+
+      <!-- Dynamic Event Cards Container -->
+      <div id="events-container" class="space-y-8">
+        <!-- Hydrated dynamically from config.js events array -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       7. RSVP SECTION (WHATSAPP-FIRST, NO BACKEND REQUIRED)
+       ======================================================================== -->
+  <section id="rsvp" class="py-16 px-4 bg-ivory">
+    <div class="max-w-xl mx-auto">
+      <div class="text-center mb-8" data-aos="fade-up">
+        <span class="shubh-vivah-badge mb-2">Your Presence is Our Blessing</span>
+        <h2 class="font-serif text-3xl font-bold text-maroon mt-2 mb-2">Kindly RSVP</h2>
+        <div class="w-16 h-[1.5px] bg-gold mx-auto"></div>
+        <p class="text-xs text-charcoal-muted mt-2 font-sans">
+          Responses are sent directly to the host family via WhatsApp.
+        </p>
+      </div>
+
+      <!-- Notice for Previously Submitted Offline RSVP -->
+      <div id="saved-rsvp-notice" class="hidden mb-4"></div>
+
+      <!-- WhatsApp-first RSVP Form Box -->
+      <div class="rsvp-container" data-aos="fade-up" data-aos-delay="100">
+        <form id="whatsapp-rsvp-form" class="space-y-4">
+          <!-- Full Name -->
+          <div>
+            <label for="rsvp-name" class="block text-xs uppercase tracking-wider font-bold text-maroon mb-1">
+              Your Full Name <span class="text-red-700">*</span>
+            </label>
+            <input type="text" id="rsvp-name" required placeholder="e.g. Rajesh &amp; Sunita Verma" class="form-input">
+          </div>
+
+          <!-- Number of Guests -->
+          <div>
+            <label for="rsvp-guests" class="block text-xs uppercase tracking-wider font-bold text-maroon mb-1">
+              Total Number of Guests
+            </label>
+            <select id="rsvp-guests" class="form-input">
+              <option value="1">1 Guest</option>
+              <option value="2" selected>2 Guests</option>
+              <option value="3">3 Guests (Family)</option>
+              <option value="4">4 Guests (Family)</option>
+              <option value="5+">5+ Guests (Large Family)</option>
+            </select>
+          </div>
+
+          <!-- Attendance Choice -->
+          <div>
+            <label class="block text-xs uppercase tracking-wider font-bold text-maroon mb-1">
+              Will you be able to attend? <span class="text-red-700">*</span>
+            </label>
+            <div class="radio-tile-group">
+              <label class="radio-tile active" for="attending-yes">
+                <input type="radio" id="attending-yes" name="attending" value="Joyfully Attending" checked>
+                <span>🌸 Joyfully Attending</span>
+              </label>
+
+              <label class="radio-tile" for="attending-no">
+                <input type="radio" id="attending-no" name="attending" value="Regretfully Declines">
+                <span>🙏 Blessing from Afar</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Warm Wishes / Message -->
+          <div>
+            <label for="rsvp-message" class="block text-xs uppercase tracking-wider font-bold text-maroon mb-1">
+              Warm Wishes / Blessings for the Couple
+            </label>
+            <textarea id="rsvp-message" rows="3" placeholder="Write your heartfelt blessings or special dietary notes..." class="form-input resize-none"></textarea>
+          </div>
+
+          <!-- Submit Button (Sends via WhatsApp + stores locally) -->
+          <div class="pt-2">
+            <button type="submit" id="submit-rsvp-btn" class="btn-royal-gold w-full text-xs">
+              <span class="text-base mr-1.5">💬</span>
+              <span>Submit &amp; Send on WhatsApp</span>
+            </button>
+            <span class="text-[0.68rem] text-charcoal-muted text-center block mt-2">
+              🔒 Works offline: your response is saved locally and prepared to send via WhatsApp.
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp RSVP Confirmation Modal -->
+  <div id="rsvp-success-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="bg-ivory border-2 border-gold rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl relative">
+      <div class="w-14 h-14 rounded-full bg-maroon border border-gold mx-auto flex items-center justify-center text-gold text-2xl mb-3">
+        <span>🙏</span>
+      </div>
+      <span class="font-devanagari text-xs text-saffron-dark font-bold">॥ धन्यवाद ॥</span>
+      <h3 class="font-serif text-2xl font-bold text-maroon mt-1 mb-2">RSVP Recorded!</h3>
+      <p class="text-xs text-charcoal-light leading-relaxed mb-4">
+        Thank you, <strong id="modal-guest-name">Guest</strong>! Your response is saved on your device and formatted for WhatsApp.
+      </p>
+      
+      <div class="space-y-2">
+        <a id="whatsapp-send-link" href="#" target="_blank" rel="noopener noreferrer" class="btn-royal-gold w-full text-xs">
+          💬 Open in WhatsApp Now
+        </a>
+        <button type="button" id="close-modal-btn" class="btn-royal-outline w-full text-xs">
+          Return to Invitation
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       8. GALLERY PLACEHOLDER SECTION (6-TILE RESPONSIVE GRID)
+       ======================================================================== -->
+  <section id="gallery" class="py-16 px-4 bg-paper border-t border-gold/40">
+    <div class="max-w-2xl mx-auto">
+      <div class="text-center mb-10" data-aos="fade-up">
+        <span class="shubh-vivah-badge mb-2">Glimpses of Love</span>
+        <h2 class="font-serif text-3xl font-bold text-maroon mt-2 mb-2">Cherished Moments</h2>
+        <div class="w-16 h-[1.5px] bg-gold mx-auto"></div>
+        <p class="text-xs text-charcoal-muted mt-2 font-sans">
+          Capturing beautiful memories from the journey so far.
+        </p>
+      </div>
+
+      <!-- 6-Tile Responsive Grid with CSS Gradient Placeholders -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+        <!-- Tile 1 -->
+        <div class="gallery-tile tile-grad-1 group" data-aos="zoom-in" data-aos-delay="50">
+          <span class="font-serif text-3xl text-gold-light/40 group-hover:scale-110 transition-transform">🌸</span>
+          <span class="text-xs font-bold text-white mt-2">Photo 1</span>
+          <span class="text-[0.65rem] text-gold-light/80 font-sans">The Roka Ceremony</span>
+        </div>
+
+        <!-- Tile 2 -->
+        <div class="gallery-tile tile-grad-2 group" data-aos="zoom-in" data-aos-delay="100">
+          <span class="font-serif text-3xl text-gold-light/40 group-hover:scale-110 transition-transform">💍</span>
+          <span class="text-xs font-bold text-white mt-2">Photo 2</span>
+          <span class="text-[0.65rem] text-gold-light/80 font-sans">Ring Exchange</span>
+        </div>
+
+        <!-- Tile 3 -->
+        <div class="gallery-tile tile-grad-3 group" data-aos="zoom-in" data-aos-delay="150">
+          <span class="font-serif text-3xl text-gold-light/40 group-hover:scale-110 transition-transform">🌿</span>
+          <span class="text-xs font-bold text-white mt-2">Photo 3</span>
+          <span class="text-[0.65rem] text-gold-light/80 font-sans">Mehndi Celebrations</span>
+        </div>
+
+        <!-- Tile 4 -->
+        <div class="gallery-tile tile-grad-4 group" data-aos="zoom-in" data-aos-delay="200">
+          <span class="font-serif text-3xl text-gold-light/40 group-hover:scale-110 transition-transform">🪘</span>
+          <span class="text-xs font-bold text-white mt-2">Photo 4</span>
+          <span class="text-[0.65rem] text-gold-light/80 font-sans">Sangeet Beats</span>
+        </div>
+
+        <!-- Tile 5 -->
+        <div class="gallery-tile tile-grad-5 group" data-aos="zoom-in" data-aos-delay="250">
+          <span class="font-serif text-3xl text-gold-light/40 group-hover:scale-110 transition-transform">☀️</span>
+          <span class="text-xs font-bold text-white mt-2">Photo 5</span>
+          <span class="text-[0.65rem] text-gold-light/80 font-sans">Haldi Radiance</span>
+        </div>
+
+        <!-- Tile 6 -->
+        <div class="gallery-tile tile-grad-6 group" data-aos="zoom-in" data-aos-delay="300">
+          <span class="font-serif text-3xl text-gold-light/40 group-hover:scale-110 transition-transform">🕊️</span>
+          <span class="text-xs font-bold text-white mt-2">Photo 6</span>
+          <span class="text-[0.65rem] text-gold-light/80 font-sans">Saat Phere Vows</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       9. FOOTER SECTION
+       ======================================================================== -->
+  <footer class="footer-section">
+    <div class="max-w-xl mx-auto space-y-4">
+      <!-- Sacred Om Emblem -->
+      <div class="w-12 h-12 rounded-full border border-gold mx-auto flex items-center justify-center text-gold text-xl font-serif">
+        <span>ॐ</span>
+      </div>
+
+      <div class="font-devanagari text-xs text-saffron font-bold tracking-wider">
+        ॥ मङ्गलं भगवान विष्णुः मङ्गलं गरुडध्वजः ॥
+      </div>
+
+      <h3 class="font-serif text-2xl font-bold text-white">
+        With love, <span data-populate="brideName">Ananya</span> &amp; <span data-populate="groomName">Aarav</span>
+      </h3>
+
+      <div class="font-devanagari text-xs text-gold-light">
+        ॥ सदा सौभाग्यवती भव • शुभ विवाह ॥
+      </div>
+
+      <!-- Wedding Hashtag -->
+      <div class="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-gold/40 text-xs text-gold font-mono my-2">
+        <span data-populate="hashtag">#AaravWedsAnanya</span>
+      </div>
+
+      <div class="pt-4 border-t border-gold/20 flex flex-wrap justify-center gap-4 text-xs text-gold-light/60">
+        <a href="#hero" class="hover:text-gold">Top</a>
+        <a href="#events" class="hover:text-gold">Itinerary</a>
+        <a href="#rsvp" class="hover:text-gold">RSVP</a>
+        <a href="admin.html" class="hover:text-gold text-saffron">⚙️ Edit Details</a>
+      </div>
+
+      <p class="text-[0.68rem] text-gold-light/40 pt-2 font-sans">
+        Offline-Ready PWA • Crafted with devotion and elegance.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       100% OFFLINE LOCAL SCRIPTS (NO CDNs)
+       ======================================================================== -->
+  <!-- Local AOS (Animate on Scroll) -->
+  <script src="libs/aos.js"></script>
+
+  <!-- Local Canvas Confetti -->
+  <script src="libs/confetti.browser.min.js"></script>
+
+  <!-- Local FlipDown Countdown Engine -->
+  <script src="libs/flipdown.js"></script>
+
+  <!-- Single Source of Truth Configuration -->
+  <script src="config.js"></script>
+
+  <!-- Main Application Script -->
+  <script src="js/main.js"></script>
+</body>
+</html>

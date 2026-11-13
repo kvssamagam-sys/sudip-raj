@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shubh Vivah — Wedding Details Control Center</title>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%237B1E1E'/><circle cx='50' cy='50' r='42' fill='none' stroke='%23D4AF37' stroke-width='3'/><text x='50' y='63' font-family='serif' font-size='44' font-weight='bold' fill='%23D4AF37' text-anchor='middle'>ॐ</text></svg>">
+
+  <link rel="stylesheet" href="css/tailwind.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="libs/confetti.browser.min.js"></script>
+</head>
+<body class="bg-ivory text-charcoal font-sans min-h-screen py-8 px-4">
+
+  <div class="max-w-3xl mx-auto">
+    <!-- Top Header -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-gold/40">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-maroon border border-gold flex items-center justify-center text-gold text-xl font-bold font-serif shadow-sm">
+          <span>ॐ</span>
+        </div>
+        <div>
+          <span class="font-devanagari text-xs text-saffron-dark font-bold">॥ शुभ विवाह नियंत्रण कक्ष ॥</span>
+          <h1 class="font-serif text-2xl sm:text-3xl font-bold text-maroon">Wedding Control Center</h1>
+          <p class="text-xs text-charcoal-muted mt-0.5">Customize names, wedding date, WhatsApp contact, and venues.</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a href="index.html" class="btn-royal-outline text-xs py-2 px-4">
+          ← View Invitation Site
+        </a>
+        <button type="button" id="reset-defaults-btn" class="text-xs text-red-700 underline px-2 py-1">
+          Reset Defaults
+        </button>
+      </div>
+    </div>
+
+    <!-- Status Alert Banner -->
+    <div id="status-banner" class="hidden mb-6 p-4 rounded-xl border border-green-400 bg-green-50 text-green-900 text-sm flex items-center justify-between shadow-sm">
+      <div class="flex items-center gap-2">
+        <span class="text-green-600 text-lg">✓</span>
+        <span id="status-message">Saved! Changes are immediately live on the invitation site.</span>
+      </div>
+      <button type="button" onclick="document.getElementById('status-banner').classList.add('hidden')" class="text-green-800 text-xs uppercase font-bold">Dismiss</button>
+    </div>
+
+    <!-- Configuration Form -->
+    <form id="admin-config-form" class="space-y-6">
+
+      <!-- 1. The Couple & WhatsApp -->
+      <div class="bg-white p-6 rounded-xl border border-gold/40 shadow-royal">
+        <h2 class="font-serif text-xl font-bold text-maroon mb-4 pb-2 border-b border-gold/20 flex items-center gap-2">
+          <span>🌸</span>
+          <span>1. The Couple &amp; Host WhatsApp</span>
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs uppercase tracking-wider font-bold text-maroon mb-1">
+              Groom's Full Name <span class="text-red-700">*</span>
+            </label>
+            <input type="text" id="cfg-groomName" required class="form-input" placeholder="e.g. Aarav Sharma">
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase tracking-wider font-bold text-maroon mb-1">
+              Bride's Full Name <span class="text-red-700">*</span>
+            </label>
+            <input type="text" id="cfg-brideName" required class="form-input" placeholder="e.g. Ananya Patel">
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase tracking-wider font-bold text-maroon mb-1">
+              Host WhatsApp Phone Number <span class="text-red-700">*</span>
+            </label>
+            <input type="text" id="cfg-hostWhatsApp" required class="form-input" placeholder="e.g. 919876543210 (Country code + number)">
+            <span class="text-[0.7rem] text-charcoal-muted mt-1 block">RSVPs will open a WhatsApp chat directly to this number.</span>
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase tracking-wider font-bold text-maroon mb-1">
+              Wedding Hashtag
+            </label>
+            <input type="text" id="cfg-hashtag" class="form-input" placeholder="e.g. #AaravWedsAnanya">
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Target Wedding Date & Venue Overview -->
+      <div class="bg-white p-6 rounded-xl border border-gold/40 shadow-royal">
+        <h2 class="font-serif text-xl font-bold text-maroon mb-4 pb-2 border-b border-gold/20 flex items-center gap-2">
+          <span>⏰</span>
+          <span>2. Wedding Date &amp; Primary Venue</span>
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs uppercase tracking-wider font-bold text-maroon mb-1">
+              Wedding Date &amp; Time (ISO Format) <span class="text-red-700">*</span>
+            </label>
+            <input type="datetime-local" id="cfg-weddingDate" required class="form-input">
+            <span class="text-[0.7rem] text-charcoal-muted mt-1 block">Drives the offline FlipDown countdown.</span>
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase tracking-wider font-bold text-maroon mb-1">
+              Primary Venue Name
+            </label>
+            <input type="text" id="cfg-venueName" class="form-input" placeholder="e.g. The Royal Palace & Heritage Gardens">
+          </div>
+
+          <div class="sm:col-span-2">
+            <label class="block text-xs uppercase tracking-wider font-bold text-maroon mb-1">
+              Primary Venue Full Address
+            </label>
+            <input type="text" id="cfg-venueAddress" class="form-input" placeholder="e.g. Palace Road, Udaipur, Rajasthan">
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Toolbar (Fixed Bottom) -->
+      <div class="p-4 bg-white border-2 border-gold rounded-xl shadow-2xl sticky bottom-4 z-20 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <button type="submit" class="btn-royal-gold text-xs">
+            💾 Save &amp; Apply Instantly
+          </button>
+          <a href="index.html" class="btn-royal-outline text-xs">
+            👁️ Open Website
+          </a>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button type="button" id="copy-config-btn" class="text-xs text-maroon font-semibold underline px-2 py-1">
+            Copy config.js
+          </button>
+          <button type="button" id="download-config-btn" class="text-xs text-maroon font-semibold underline px-2 py-1">
+            Download config.js
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script src="config.js"></script>
+  <script>
+    const form = document.getElementById('admin-config-form');
+    const banner = document.getElementById('status-banner');
+    const statusMsg = document.getElementById('status-message');
+    const resetBtn = document.getElementById('reset-defaults-btn');
+    const copyBtn = document.getElementById('copy-config-btn');
+    const downloadBtn = document.getElementById('download-config-btn');
+
+    function loadConfig() {
+      let cfg = window.WEDDING_CONFIG || {};
+      const saved = localStorage.getItem('wedding_custom_config');
+      if (saved) {
+        try {
+          cfg = Object.assign({}, cfg, JSON.parse(saved));
+        } catch (e) {
+          console.warn(e);
+        }
+      }
+
+      const d = cfg._defaults || {};
+      function val(v, fallback) {
+        if (!v || (typeof v === 'string' && v.startsWith('{{') && v.endsWith('}}'))) return fallback || '';
+        return v;
+      }
+
+      document.getElementById('cfg-groomName').value = val(cfg.groomName, d.groomName || 'Aarav Sharma');
+      document.getElementById('cfg-brideName').value = val(cfg.brideName, d.brideName || 'Ananya Patel');
+      document.getElementById('cfg-hostWhatsApp').value = val(cfg.hostWhatsApp, d.hostWhatsApp || '919876543210');
+      document.getElementById('cfg-hashtag').value = val(cfg.hashtag, d.hashtag || '#AaravWedsAnanya');
+
+      const dateStr = val(cfg.weddingDate, d.weddingDate || '2026-11-28T18:00:00');
+      document.getElementById('cfg-weddingDate').value = dateStr.length >= 16 ? dateStr.substring(0, 16) : '2026-11-28T18:00';
+      document.getElementById('cfg-venueName').value = val(cfg.venueName, d.venueName || 'The Royal Palace & Heritage Gardens');
+      document.getElementById('cfg-venueAddress').value = val(cfg.venueAddress, d.venueAddress || 'Palace Road, Udaipur, Rajasthan');
+    }
+
+    function gatherData() {
+      const groom = document.getElementById('cfg-groomName').value.trim();
+      const bride = document.getElementById('cfg-brideName').value.trim();
+      const hostWhatsApp = document.getElementById('cfg-hostWhatsApp').value.trim();
+      const weddingDate = document.getElementById('cfg-weddingDate').value;
+      const venueName = document.getElementById('cfg-venueName').value.trim();
+      const venueAddress = document.getElementById('cfg-venueAddress').value.trim();
+
+      return {
+        groomName: groom,
+        brideName: bride,
+        coupleInitials: `${groom[0]} & ${bride[0]}`,
+        hostWhatsApp: hostWhatsApp,
+        weddingDate: weddingDate ? `${weddingDate}:00` : '2026-11-28T18:00:00',
+        venueName: venueName,
+        venueAddress: venueAddress,
+        hashtag: document.getElementById('cfg-hashtag').value.trim()
+      };
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = gatherData();
+      localStorage.setItem('wedding_custom_config', JSON.stringify(data));
+
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 70, spread: 60, origin: { y: 0.8 }, colors: ['#D4AF37', '#FF9933', '#7B1E1E'] });
+      }
+
+      banner.classList.remove('hidden');
+      statusMsg.textContent = "Saved successfully! All details have been updated on the invitation site.";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    resetBtn.addEventListener('click', () => {
+      if (confirm("Reset to sample defaults?")) {
+        localStorage.removeItem('wedding_custom_config');
+        localStorage.removeItem('shubh_vivah_rsvp_saved');
+        loadConfig();
+        banner.classList.remove('hidden');
+        statusMsg.textContent = "Reset to original defaults.";
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+
+    function generateCode() {
+      const data = gatherData();
+      const merged = Object.assign({}, window.WEDDING_CONFIG, data);
+      return `/**
+ * SHUBH VIVAH CONFIGURATION
+ * Generated via Wedding Details Control Center (admin.html)
+ */
+
+const WEDDING_CONFIG = ${JSON.stringify(merged, null, 2)};
+
+if (typeof window !== 'undefined') {
+  window.WEDDING_CONFIG = WEDDING_CONFIG;
+}
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = WEDDING_CONFIG;
+}
+`;
+    }
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(generateCode()).then(() => alert("Copied config.js to clipboard!"));
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      const blob = new Blob([generateCode()], { type: 'text/javascript;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'config.js';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+
+    document.addEventListener('DOMContentLoaded', loadConfig);
+  </script>
+</body>
+</html>

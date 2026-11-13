@@ -1,0 +1,24 @@
+{
+  "name": "Shubh Vivah — Wedding & Engagement Invitation",
+  "short_name": "Shubh Vivah",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FFF8E7",
+  "theme_color": "#7B1E1E",
+  "orientation": "portrait",
+  "description": "Sacred Indian Wedding & Engagement Invitation of Aarav & Ananya",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='36' fill='%237B1E1E'/><circle cx='96' cy='96' r='76' fill='none' stroke='%23D4AF37' stroke-width='4'/><text x='96' y='118' font-family='serif' font-size='68' font-weight='bold' fill='%23D4AF37' text-anchor='middle'>ॐ</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='96' fill='%237B1E1E'/><circle cx='256' cy='256' r='210' fill='none' stroke='%23D4AF37' stroke-width='10'/><text x='256' y='315' font-family='serif' font-size='190' font-weight='bold' fill='%23D4AF37' text-anchor='middle'>ॐ</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
